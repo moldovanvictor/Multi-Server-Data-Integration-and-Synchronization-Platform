@@ -1,0 +1,36 @@
+{ 
+"students": [ 
+{"id": 1, 
+"name": "Pop Ion"}, 
+{"id": 2, 
+"name": "Pop Maria"} 
+], 
+"courses": [ 
+{"id": 1, 
+"title": "Web development", 
+"teacher":{"name":"Popescu Ion","office":404}}, 
+{"id": 2, 
+"title": "Java", 
+"teacher":{"name":"Ionescu Maria","office":403}}, 
+{"id": 3, 
+"title": "Databases", 
+"teacher":{"name":"Marian Vasile","office":401}} 
+], 
+"grades": [ 
+{"course_id":1, 
+"student_id":1, 
+"grade":7}, 
+{"course_id":1, 
+"student_id":2, 
+"grade":5}, 
+{"course_id":2, 
+"student_id":1, 
+"grade":5}, 
+{"course_id":2, 
+"student_id":2, 
+"grade":5}, 
+{"course_id":3, 
+"student_id":2, 
+"grade":10} 
+] 
+} 
