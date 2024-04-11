@@ -12,3 +12,10 @@
 11-Apr-2024 19:51:16.367 INFO [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
 11-Apr-2024 19:51:16.367 INFO [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
 11-Apr-2024 19:51:16.368 INFO [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@256ec513')
+11-Apr-2024 20:43:06.412 INFO [main] org.apache.catalina.core.ApplicationContext.log No Spring WebApplicationInitializer types detected on classpath
+11-Apr-2024 20:43:06.433 INFO [main] org.apache.catalina.core.ApplicationContext.log org.tuckey.web.filters.urlrewrite.UrlRewriteFilter INFO: status display disabled
+11-Apr-2024 20:43:06.452 INFO [main] org.apache.catalina.core.ApplicationContext.log org.tuckey.web.filters.urlrewrite.UrlRewriteFilter INFO: loaded (conf ok)
+11-Apr-2024 20:43:06.552 INFO [main] org.apache.catalina.core.ApplicationContext.log Initializing Spring DispatcherServlet 'rdf4j-http-server'
+11-Apr-2024 20:43:09.093 INFO [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+11-Apr-2024 20:43:09.093 INFO [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+11-Apr-2024 20:43:09.094 INFO [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@3f6278d4')

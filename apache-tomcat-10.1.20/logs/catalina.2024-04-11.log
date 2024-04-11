@@ -660,3 +660,50 @@
 11-Apr-2024 19:51:16.418 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\wamp64\www\apache-tomcat-10.1.20\webapps\ROOT] has finished in [10] ms
 11-Apr-2024 19:51:16.420 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
 11-Apr-2024 19:51:16.429 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [5112] milliseconds
+11-Apr-2024 20:43:03.657 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/10.1.20
+11-Apr-2024 20:43:03.660 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Mar 19 2024 12:49:58 UTC
+11-Apr-2024 20:43:03.661 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 10.1.20.0
+11-Apr-2024 20:43:03.661 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Windows 11
+11-Apr-2024 20:43:03.662 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.0
+11-Apr-2024 20:43:03.662 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+11-Apr-2024 20:43:03.662 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             C:\Program Files\Java\jdk-19
+11-Apr-2024 20:43:03.662 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           19.0.2+7-44
+11-Apr-2024 20:43:03.663 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+11-Apr-2024 20:43:03.663 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         C:\wamp64\www\apache-tomcat-10.1.20
+11-Apr-2024 20:43:03.664 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         C:\wamp64\www\apache-tomcat-10.1.20
+11-Apr-2024 20:43:03.673 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=C:\wamp64\www\apache-tomcat-10.1.20\conf\logging.properties
+11-Apr-2024 20:43:03.673 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+11-Apr-2024 20:43:03.673 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+11-Apr-2024 20:43:03.673 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+11-Apr-2024 20:43:03.673 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+11-Apr-2024 20:43:03.674 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+11-Apr-2024 20:43:03.674 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+11-Apr-2024 20:43:03.674 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+11-Apr-2024 20:43:03.674 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+11-Apr-2024 20:43:03.674 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=C:\wamp64\www\apache-tomcat-10.1.20
+11-Apr-2024 20:43:03.674 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=C:\wamp64\www\apache-tomcat-10.1.20
+11-Apr-2024 20:43:03.674 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=C:\wamp64\www\apache-tomcat-10.1.20\temp
+11-Apr-2024 20:43:03.678 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Loaded Apache Tomcat Native library [2.0.7] using APR version [1.7.4].
+11-Apr-2024 20:43:03.689 INFO [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL successfully initialized [OpenSSL 3.0.13 30 Jan 2024]
+11-Apr-2024 20:43:03.860 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+11-Apr-2024 20:43:03.877 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [356] milliseconds
+11-Apr-2024 20:43:03.911 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+11-Apr-2024 20:43:03.911 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/10.1.20]
+11-Apr-2024 20:43:03.923 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [C:\wamp64\www\apache-tomcat-10.1.20\webapps\rdf4j-server.war]
+11-Apr-2024 20:43:06.298 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+11-Apr-2024 20:43:07.393 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [C:\wamp64\www\apache-tomcat-10.1.20\webapps\rdf4j-server.war] has finished in [3,469] ms
+11-Apr-2024 20:43:07.395 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deploying web application archive [C:\wamp64\www\apache-tomcat-10.1.20\webapps\rdf4j-workbench.war]
+11-Apr-2024 20:43:08.913 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+11-Apr-2024 20:43:08.923 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR Deployment of web application archive [C:\wamp64\www\apache-tomcat-10.1.20\webapps\rdf4j-workbench.war] has finished in [1,528] ms
+11-Apr-2024 20:43:08.923 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\wamp64\www\apache-tomcat-10.1.20\webapps\docs]
+11-Apr-2024 20:43:08.938 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\wamp64\www\apache-tomcat-10.1.20\webapps\docs] has finished in [14] ms
+11-Apr-2024 20:43:08.938 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\wamp64\www\apache-tomcat-10.1.20\webapps\examples]
+11-Apr-2024 20:43:09.099 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\wamp64\www\apache-tomcat-10.1.20\webapps\examples] has finished in [160] ms
+11-Apr-2024 20:43:09.099 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\wamp64\www\apache-tomcat-10.1.20\webapps\host-manager]
+11-Apr-2024 20:43:09.115 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\wamp64\www\apache-tomcat-10.1.20\webapps\host-manager] has finished in [15] ms
+11-Apr-2024 20:43:09.115 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\wamp64\www\apache-tomcat-10.1.20\webapps\manager]
+11-Apr-2024 20:43:09.131 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\wamp64\www\apache-tomcat-10.1.20\webapps\manager] has finished in [16] ms
+11-Apr-2024 20:43:09.131 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [C:\wamp64\www\apache-tomcat-10.1.20\webapps\ROOT]
+11-Apr-2024 20:43:09.141 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [C:\wamp64\www\apache-tomcat-10.1.20\webapps\ROOT] has finished in [10] ms
+11-Apr-2024 20:43:09.144 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+11-Apr-2024 20:43:09.154 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [5276] milliseconds
