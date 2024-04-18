@@ -1,6 +1,6 @@
 <?php
 // Fetch the HTML content from the other server
-$html = file_get_contents('http://localhost:5174/date.php');
+$html = file_get_contents('http://localhost:4000/date.php');
 
 // Use DOMDocument to parse the HTML
 $dom = new DOMDocument;

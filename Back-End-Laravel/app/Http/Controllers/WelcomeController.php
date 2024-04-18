@@ -22,7 +22,7 @@ public function index()
     $ch = curl_init();
 
     // Set the URL of the server you want to send a request to (Frontend 2)
-    curl_setopt($ch, CURLOPT_URL, "http://localhost:5174");
+    curl_setopt($ch, CURLOPT_URL, "http://localhost:4000");
 
     // Set the option to return the response as a string
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
