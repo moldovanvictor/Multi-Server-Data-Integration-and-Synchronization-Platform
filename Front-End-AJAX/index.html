@@ -1,22 +1,145 @@
 <html>
 <head>
-  <script type="application/javascript" id="bloc"></script>
-  <script>
-    function cerere()
-    {
-      blocJS=document.getElementById("bloc")
-      blocJS.src="http://127.0.0.1:8000" + "/date.php?callback=procesareRaspuns"
-    }
-    function procesareRaspuns(date)
-    {
-      produs=date.Comanda.Produse[0].Denumire
-      tinta=document.getElementById("tinta")
-      tinta.innerHTML+=produs
-    }
-  </script>
+    <script type="application/javascript" id="bloc"></script>
+    <script>
+        br = document.createElement('br');
+        function cerere() {
+            blocJS = document.getElementById("bloc");
+            blocJS.src = "http://127.0.0.1:8000?callback=procesareRaspuns";
+        }
+        function createFirstTable(date) {
+            tinta = document.getElementById("tinta");
+            table = document.createElement('table');
+            table.setAttribute('border', '1');
+            thead = document.createElement('thead');
+            headerRow = document.createElement('tr');
+            headers = ['Nume Firma', 'Adresa', 'Nume Pozitie', 'Descriere Pozitie', 'Data Postarii', 'Data Expirarii', 'Tip Contract'];
+            headers.forEach(function (header) {
+                th = document.createElement('th');
+                th.textContent = header;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+            tbody = document.createElement('tbody');
+            date['@graph'].forEach(function (firma) {
+                row = document.createElement('tr');
+                tdNumeFirma = document.createElement('td');
+                tdNumeFirma.textContent = firma.name;
+                tdAdresa = document.createElement('td');
+                tdAdresa.textContent = firma.address;
+                firma.jobPosting.forEach(function (job) {
+                    tdNumePozitie = document.createElement('td');
+                    tdNumePozitie.textContent = job.title;
+                    tdDescriere = document.createElement('td');
+                    tdDescriere.textContent = job.description;
+                    tdDataPostarii = document.createElement('td');
+                    tdDataPostarii.textContent = job.datePosted;
+                    tdDataExpirarii = document.createElement('td');
+                    tdDataExpirarii.textContent = job.validThrough;
+                    tdTipContract = document.createElement('td');
+                    tdTipContract.textContent = job.employmentType;
+                    row.appendChild(tdNumeFirma);
+                    row.appendChild(tdAdresa);
+                    row.appendChild(tdNumePozitie);
+                    row.appendChild(tdDescriere);
+                    row.appendChild(tdDataPostarii);
+                    row.appendChild(tdDataExpirarii);
+                    row.appendChild(tdTipContract);
+                    tbody.appendChild(row);
+                });
+            });
+            table.appendChild(tbody);
+            tinta.appendChild(table);
+        }
+        function createFirstForm(date) {
+            form = document.createElement('form');
+            form.setAttribute('id', 'toRdf4j');
+            form.style.border = '1px solid black';
+            form.style.display = 'inline-block';
+            form.style.width = 'auto';
+            labelName = document.createElement('label');
+            labelName.setAttribute('for', 'firme');
+            labelName.textContent = 'Nume Firma:   ';
+            form.appendChild(labelName);
+            dropdown = document.createElement('select');
+            dropdown.setAttribute('name', 'firme');
+            dropdown.setAttribute('id', 'firme');
+            form.appendChild(dropdown);
+            form.appendChild(document.createElement('br'));
+            labelTitle = document.createElement('label');
+            labelTitle.setAttribute('for', 'title');
+            labelTitle.textContent = 'Nume Pozitie:   ';
+            form.appendChild(labelTitle);
+            inputTitle = document.createElement('input');
+            inputTitle.setAttribute('type', 'text');
+            inputTitle.setAttribute('id', 'title');
+            inputTitle.setAttribute('name', 'title');
+            form.appendChild(inputTitle);
+            form.appendChild(document.createElement('br'));
+            labelDescriere = document.createElement('label');
+            labelDescriere.setAttribute('for', 'description');
+            labelDescriere.textContent = 'Descriere Pozitie:   ';
+            form.appendChild(labelDescriere);
+            inputDescriere = document.createElement('input');
+            inputDescriere.setAttribute('type', 'text');
+            inputDescriere.setAttribute('id', 'description');
+            inputDescriere.setAttribute('name', 'description');
+            form.appendChild(inputDescriere);
+            form.appendChild(document.createElement('br'));
+            labelDataPostarii = document.createElement('label');
+            labelDataPostarii.setAttribute('for', 'postingDate');
+            labelDataPostarii.textContent = 'Data Postarii:   ';
+            form.appendChild(labelDataPostarii);
+            inputDataPostarii = document.createElement('input');
+            inputDataPostarii.setAttribute('type', 'date');
+            inputDataPostarii.setAttribute('id', 'postingDate');
+            inputDataPostarii.setAttribute('name', 'postingDate');
+            form.appendChild(inputDataPostarii);
+            form.appendChild(document.createElement('br'));
+            labelDataExpirarii = document.createElement('label');
+            labelDataExpirarii.setAttribute('for', 'expiringDate');
+            labelDataExpirarii.textContent = 'Data Expirarii:   ';
+            form.appendChild(labelDataExpirarii);
+            inputDataExpirarii = document.createElement('input');
+            inputDataExpirarii.setAttribute('type', 'date');
+            inputDataExpirarii.setAttribute('id', 'expiringDate');
+            inputDataExpirarii.setAttribute('name', 'expiringDate');
+            form.appendChild(inputDataExpirarii);
+            form.appendChild(document.createElement('br'));
+            labelTipContract = document.createElement('label');
+            labelTipContract.setAttribute('for', 'employmentType');
+            labelTipContract.textContent = 'Tip Contract:   ';
+            form.appendChild(labelTipContract);
+            dropdownTipContract = document.createElement('select');
+            contractOptionArray = ['FULL_TIME', 'PART_TIME', 'CONTRACT', 'TEMPORARY', 'SEASONAL', 'INTERNSHIP'];
+            contractOptionArray.forEach(function (opt) {
+                option = document.createElement('option');
+                option.text = opt;
+                dropdownTipContract.add(option);
+            });
+            form.appendChild(dropdownTipContract);
+            form.appendChild(document.createElement('br'));
+            toRdfBUtton = document.createElement('input');
+            toRdfBUtton.setAttribute('type', 'button');
+            toRdfBUtton.setAttribute('onclick', 'trimiteCatreRdf4j()');
+            toRdfBUtton.setAttribute('value', 'Trimite Catre RDF4J');
+            form.appendChild(toRdfBUtton);
+            date['@graph'].forEach(function (firma) {
+                option = document.createElement('option');
+                option.text = firma.name;
+                dropdown.add(option);
+            });
+            tinta.appendChild(form);
+        }
+        function procesareRaspuns(date) {
+            createFirstTable(date);
+            createFirstForm(date);
+        }
+    </script>
 </head>
 <body>
+    <input type="button" onclick="cerere()" value="Declanseaza cerere" />
+    <div id="tinta"></div>
 </body>
 </html>
-<input type="button" onclick="cerere()" value="Declanseaza cerere"/>
-<div id="tinta"></div>
