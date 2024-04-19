@@ -136,6 +136,21 @@
             createFirstTable(date);
             createFirstForm(date);
         }
+
+        function trimiteCatreRdf4j() {
+            var formElement = document.querySelector('#toRdf4j');
+            var formData = new FormData(formElement);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://127.0.0.1:8000", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert('Date trimise cu succes!');
+                    console.log(xhr.responseText);
+                }
+            };
+            xhr.send(formData);
+        }
     </script>
 </head>
 <body>

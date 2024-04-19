@@ -1,4 +1,5 @@
 <?php
+
 // Fetch the HTML content from the other server
 $html = file_get_contents('http://localhost:4000/date.php');
 
@@ -20,4 +21,25 @@ $data = json_decode($json_data, true);
 
 // Now you can use the data...
 print_r($data);
+
+
+function sendToRDF4J($data) {
+    $url = 'http://localhost:8080/rdf4j-server/repositories/web-semantic';
+    $jsonData = json_encode($data);
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/sparql-update'
+    ]);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+    $result = curl_exec($ch);
+    if (curl_errno($ch)) {
+        echo "Curl error: " . curl_error($ch);
+    }
+    curl_close($ch);
+
+    return $result;
+}
+
 ?>
