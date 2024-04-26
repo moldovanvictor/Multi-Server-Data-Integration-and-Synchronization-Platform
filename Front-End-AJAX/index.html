@@ -1,11 +1,17 @@
 <html>
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script type="application/javascript" id="bloc"></script>
+    <script type="application/javascript" id="bloc2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <script>
         br = document.createElement('br');
+        const csrfToken = document.querySelector( 'meta[name="csrf-token"]' ).getAttribute('content');
+        axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
         function cerere() {
             blocJS = document.getElementById("bloc");
-            blocJS.src = "http://127.0.0.1:8000?callback=procesareRaspuns";
+            blocJS.src = "http://127.0.0.1:8000/jsonLdScraping?callback=procesareRaspuns";
         }
         function createFirstTable(date) {
             tinta = document.getElementById("tinta");
@@ -13,7 +19,7 @@
             table.setAttribute('border', '1');
             thead = document.createElement('thead');
             headerRow = document.createElement('tr');
-            headers = ['Nume Firma', 'Adresa', 'Nume Pozitie', 'Descriere Pozitie', 'Data Postarii', 'Data Expirarii', 'Tip Contract'];
+            headers = ['Nume Pozitie', 'Descriere Pozitie', 'Data Postarii', 'Data Expirarii', 'Tip Contract', 'Nume Firma', 'Adresa'];
             headers.forEach(function (header) {
                 th = document.createElement('th');
                 th.textContent = header;
@@ -22,14 +28,9 @@
             thead.appendChild(headerRow);
             table.appendChild(thead);
             tbody = document.createElement('tbody');
-            date['@graph'].forEach(function (firma) {
+            date['@graph'].forEach( function(job) {
                 row = document.createElement('tr');
-                tdNumeFirma = document.createElement('td');
-                tdNumeFirma.textContent = firma.name;
-                tdAdresa = document.createElement('td');
-                tdAdresa.textContent = firma.address;
-                firma.jobPosting.forEach(function (job) {
-                    tdNumePozitie = document.createElement('td');
+                tdNumePozitie = document.createElement('td');
                     tdNumePozitie.textContent = job.title;
                     tdDescriere = document.createElement('td');
                     tdDescriere.textContent = job.description;
@@ -39,22 +40,28 @@
                     tdDataExpirarii.textContent = job.validThrough;
                     tdTipContract = document.createElement('td');
                     tdTipContract.textContent = job.employmentType;
-                    row.appendChild(tdNumeFirma);
-                    row.appendChild(tdAdresa);
                     row.appendChild(tdNumePozitie);
                     row.appendChild(tdDescriere);
                     row.appendChild(tdDataPostarii);
                     row.appendChild(tdDataExpirarii);
                     row.appendChild(tdTipContract);
                     tbody.appendChild(row);
-                });
-            });
+                    job.hiringOrganization.forEach( function ( firma ) {
+                        tdNumeFirma = document.createElement('td');
+                        tdNumeFirma.textContent = firma.name;
+                        tdAdresa = document.createElement('td');
+                        tdAdresa.textContent = firma.address;
+                        row.appendChild(tdNumeFirma);
+                        row.appendChild(tdAdresa);
+                    } );
+            } );
             table.appendChild(tbody);
             tinta.appendChild(table);
         }
         function createFirstForm(date) {
             form = document.createElement('form');
             form.setAttribute('id', 'toRdf4j');
+            form.setAttribute( 'method', 'POST' );
             form.style.border = '1px solid black';
             form.style.display = 'inline-block';
             form.style.width = 'auto';
@@ -62,84 +69,89 @@
             labelName.setAttribute('for', 'firme');
             labelName.textContent = 'Nume Firma:   ';
             form.appendChild(labelName);
-            dropdown = document.createElement('select');
-            dropdown.setAttribute('name', 'firme');
-            dropdown.setAttribute('id', 'firme');
-            form.appendChild(dropdown);
+            inputFirme = document.createElement('input');
+            inputFirme.setAttribute( 'type', 'text' );
+            inputFirme.setAttribute('name', 'firme');
+            inputFirme.setAttribute('id', 'firme');
+            form.appendChild(inputFirme);
             form.appendChild(document.createElement('br'));
-            labelTitle = document.createElement('label');
-            labelTitle.setAttribute('for', 'title');
-            labelTitle.textContent = 'Nume Pozitie:   ';
-            form.appendChild(labelTitle);
-            inputTitle = document.createElement('input');
-            inputTitle.setAttribute('type', 'text');
-            inputTitle.setAttribute('id', 'title');
-            inputTitle.setAttribute('name', 'title');
-            form.appendChild(inputTitle);
+            labelAddress = document.createElement( 'label' );
+            labelAddress.setAttribute('for', 'adresa');
+            labelAddress.textContent = "Adresa Firma:   ";
+            form.appendChild( labelAddress );
+            inputAddress = document.createElement( 'input' );
+            inputAddress.setAttribute( 'type', 'text' );
+            inputAddress.setAttribute('name', 'adresa');
+            inputAddress.setAttribute('id', 'adresa');
+            form.appendChild( inputAddress );
+            labelPozitie = document.createElement( 'label' );
+            labelPozitie.setAttribute( 'for', 'title' );
+            labelPozitie.textContent = 'Pozitie:   ';
             form.appendChild(document.createElement('br'));
-            labelDescriere = document.createElement('label');
-            labelDescriere.setAttribute('for', 'description');
-            labelDescriere.textContent = 'Descriere Pozitie:   ';
-            form.appendChild(labelDescriere);
-            inputDescriere = document.createElement('input');
-            inputDescriere.setAttribute('type', 'text');
-            inputDescriere.setAttribute('id', 'description');
-            inputDescriere.setAttribute('name', 'description');
-            form.appendChild(inputDescriere);
-            form.appendChild(document.createElement('br'));
-            labelDataPostarii = document.createElement('label');
-            labelDataPostarii.setAttribute('for', 'postingDate');
-            labelDataPostarii.textContent = 'Data Postarii:   ';
-            form.appendChild(labelDataPostarii);
-            inputDataPostarii = document.createElement('input');
-            inputDataPostarii.setAttribute('type', 'date');
-            inputDataPostarii.setAttribute('id', 'postingDate');
-            inputDataPostarii.setAttribute('name', 'postingDate');
-            form.appendChild(inputDataPostarii);
-            form.appendChild(document.createElement('br'));
-            labelDataExpirarii = document.createElement('label');
-            labelDataExpirarii.setAttribute('for', 'expiringDate');
-            labelDataExpirarii.textContent = 'Data Expirarii:   ';
-            form.appendChild(labelDataExpirarii);
-            inputDataExpirarii = document.createElement('input');
-            inputDataExpirarii.setAttribute('type', 'date');
-            inputDataExpirarii.setAttribute('id', 'expiringDate');
-            inputDataExpirarii.setAttribute('name', 'expiringDate');
-            form.appendChild(inputDataExpirarii);
-            form.appendChild(document.createElement('br'));
-            labelTipContract = document.createElement('label');
-            labelTipContract.setAttribute('for', 'employmentType');
-            labelTipContract.textContent = 'Tip Contract:   ';
-            form.appendChild(labelTipContract);
-            dropdownTipContract = document.createElement('select');
-            contractOptionArray = ['FULL_TIME', 'PART_TIME', 'CONTRACT', 'TEMPORARY', 'SEASONAL', 'INTERNSHIP'];
-            contractOptionArray.forEach(function (opt) {
+            form.appendChild( labelPozitie );
+            dropdownPozitie = document.createElement( 'select' );
+            dropdownPozitie.setAttribute( 'id', 'title' );
+            date['@graph'].forEach( function( pozitie ) {
                 option = document.createElement('option');
-                option.text = opt;
-                dropdownTipContract.add(option);
-            });
-            form.appendChild(dropdownTipContract);
+                option.text = pozitie.title;
+                dropdownPozitie.add(option);
+            } );
+            form.appendChild( dropdownPozitie );
             form.appendChild(document.createElement('br'));
             toRdfBUtton = document.createElement('input');
             toRdfBUtton.setAttribute('type', 'button');
-            toRdfBUtton.setAttribute('onclick', 'trimiteCatreRdf4j()');
+            toRdfBUtton.setAttribute('onclick', 'trimiteCatreRdf4j('+JSON.stringify( date )+')');
             toRdfBUtton.setAttribute('value', 'Trimite Catre RDF4J');
             form.appendChild(toRdfBUtton);
-            date['@graph'].forEach(function (firma) {
-                option = document.createElement('option');
-                option.text = firma.name;
-                dropdown.add(option);
-            });
+            
             tinta.appendChild(form);
         }
         function procesareRaspuns(date) {
             createFirstTable(date);
             createFirstForm(date);
         }
+        function preiaDateRdf4j() {
+            axios.get( "http://127.0.0.1:8000/sendToRdf4j" )
+            .then( (response) => {
+                console.log( response.data );
+            } );
+            alert('ok');
+        }
+        function trimiteCatreRdf4j(date) {
+            firmeValue = document.getElementById( 'firme' ).value;
+            adresaValue = document.getElementById( 'adresa' ).value;
+            pozitieValue = document.getElementById( 'title' ).value;
+            pozitieToAppend = date['@graph'].find( job => job['title'] === pozitieValue );
+            jsonToAppend = {
+                "@type": "Organization",
+                "@id": "x:"+firmeValue.toLowerCase(),
+                "name": firmeValue,
+                "address": adresaValue
+            };
+            pozitieToAppend.hiringOrganization.push( jsonToAppend );
+            
+            
+            axios.post("http://127.0.0.1:8000/sendToRdf4j", date)
+            .then((response) => {
+                console.log(response.data);
+                console.log( response.data.turtleData );
+                butonGetRdf4j = document.createElement( 'input' );
+                butonGetRdf4j.setAttribute( 'type', 'button' );
+                butonGetRdf4j.setAttribute( 'onclick', 'preiaDateRdf4j()' );
+                butonGetRdf4j.setAttribute( 'value', 'Preia date de la RDF4J' );
+                document.getElementById('tinta').appendChild( br );
+                document.getElementById('tinta').appendChild( butonGetRdf4j );
+            })
+            .catch((error) => console.log(error));
+            
+            
+            
+        }
+        
     </script>
 </head>
 <body>
     <input type="button" onclick="cerere()" value="Declanseaza cerere" />
-    <div id="tinta"></div>
+    <div id="tinta"></div> 
 </body>
 </html>

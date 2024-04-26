@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
-
+use App\Http\Controllers\ToRdf4jController;
+use App\Http\Controllers\FromRdf4jController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +15,8 @@ use App\Http\Controllers\WelcomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/', [WelcomeController::class, 'index']);
-Route::get('contact', [WelcomeController::class, 'contact']);
+
+Route::get('/jsonLdScraping', [WelcomeController::class, 'index']);
+Route::post('/sendToRdf4j', [ToRdf4jController::class, 'index'] );
+Route::get('/getRdf4j', [FromRdf4jController::class, 'index'] );
