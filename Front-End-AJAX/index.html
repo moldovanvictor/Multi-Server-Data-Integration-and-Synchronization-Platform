@@ -110,12 +110,89 @@
             createFirstTable(date);
             createFirstForm(date);
         }
-        function preiaDateRdf4j() {
-            axios.get( "http://127.0.0.1:8000/sendToRdf4j" )
-            .then( (response) => {
-                console.log( response.data );
+
+        function trimiteDateGraphql( dateGraphQl ) {
+            axios.post("http://127.0.0.1:8000/sendToGraphQl", dateGraphQl)
+            .then((response) => {
+                butonGetRdf4j = document.createElement( 'input' );
+                butonGetRdf4j.setAttribute( 'type', 'button' );
+                butonGetRdf4j.setAttribute( 'onclick', 'preiaDateRdf4j()' );
+                butonGetRdf4j.setAttribute( 'value', 'Preia date de la RDF4J' );
+                document.getElementById('tinta').appendChild( br );
+                document.getElementById('tinta').appendChild( butonGetRdf4j );
+            })
+            .catch((error) => console.log(error));
+        }
+        
+        function procesareDateRdf4j(dateRdf4j) {
+            tinta = document.getElementById("tinta");
+            table = document.createElement('table');
+            table.setAttribute('border', '1');
+            thead = document.createElement('thead');
+            headerRow = document.createElement('tr');
+            headers = ['Nume Pozitie', 'Descriere Pozitie', 'Data Postarii', 'Data Expirarii', 'Tip Contract', 'Nume Firma', 'Adresa'];
+            headers.forEach(function (header) {
+                th = document.createElement('th');
+                th.textContent = header;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+            tbody = document.createElement('tbody');
+            dateRdf4j.forEach( function( o ) {
+                if ( o['@type'] && o['@type'] == 'https://schema.org/JobPosting' ) {
+                    for ( let i = 0; i < o['https://schema.org/hiringOrganization'].length; i++ ) {
+                        row = document.createElement('tr');
+                        tdNumePozitie = document.createElement('td');
+                        tdNumePozitie.textContent = o['https://schema.org/title'][0]['@value'];
+                        tdDescriere = document.createElement('td');
+                        tdDescriere.textContent = o['https://schema.org/description'][0]['@value'];
+                        tdDataPostarii = document.createElement('td');
+                        tdDataPostarii.textContent = o['https://schema.org/datePosted'][0]['@value'];
+                        tdDataExpirarii = document.createElement('td');
+                        tdDataExpirarii.textContent = o['https://schema.org/validThrough'][0]['@value'];
+                        tdTipContract = document.createElement('td');
+                        tdTipContract.textContent = o['https://schema.org/employmentType'][0]['@value'];
+                        firmaObj = dateRdf4j.find( x => x['@id'] === o['https://schema.org/hiringOrganization'][i]['@id'] );
+                        tdNumeFirma = document.createElement('td');
+                        tdNumeFirma.textContent = firmaObj['https://schema.org/name'][0]['@value'];
+                        tdAdresa = document.createElement('td');
+                        tdAdresa.textContent = firmaObj['https://schema.org/address'][0]['@value']
+                        row.appendChild(tdNumePozitie);
+                        row.appendChild(tdDescriere);
+                        row.appendChild(tdDataPostarii);
+                        row.appendChild(tdDataExpirarii);
+                        row.appendChild(tdTipContract);
+                        row.appendChild(tdNumeFirma);
+                        row.appendChild(tdAdresa);
+                        tbody.appendChild(row);
+                    }  
+                }
+                // console.log( o );
             } );
-            alert('ok');
+            console.log( dateRdf4j.find( x => x['@id'] === 'http://victor-vlad.ro/uipath' ) );
+            console.log( dateRdf4j[6] );
+            console.log( dateRdf4j[6]['@id'] );
+            console.log( dateRdf4j[6]['https://schema.org/name'][0]['@value'] );
+            console.log( dateRdf4j[6]['https://schema.org/address'][0]['@value'] );
+            console.log( dateRdf4j[2]['https://schema.org/hiringOrganization'][0]['@id'] );
+            table.appendChild(tbody);
+            tinta.appendChild( table );
+            butonToGraphql = document.createElement( 'input' );
+            butonToGraphql.setAttribute( 'type', 'button' );
+            butonToGraphql.setAttribute( 'onclick', 'trimiteDateGraphql('+ JSON.stringify( dateRdf4j ) +')' );
+            butonToGraphql.setAttribute( 'value', 'Trimite date la GraphQL' );
+            document.getElementById('tinta').appendChild( br );
+            document.getElementById('tinta').appendChild( butonToGraphql );
+            
+        }
+
+        function preiaDateRdf4j() {
+            axios.get( "http://127.0.0.1:8000/getRdf4j" )
+            .then( (response) => {
+                procesareDateRdf4j( response.data );
+            } )
+            .catch((error) => console.log(error));
         }
         function trimiteCatreRdf4j(date) {
             firmeValue = document.getElementById( 'firme' ).value;
@@ -133,8 +210,6 @@
             
             axios.post("http://127.0.0.1:8000/sendToRdf4j", date)
             .then((response) => {
-                console.log(response.data);
-                console.log( response.data.turtleData );
                 butonGetRdf4j = document.createElement( 'input' );
                 butonGetRdf4j.setAttribute( 'type', 'button' );
                 butonGetRdf4j.setAttribute( 'onclick', 'preiaDateRdf4j()' );
