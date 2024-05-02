@@ -1,1 +1,16 @@
-{}
+{
+    "jobPosting" : [
+        {
+            "title" : "testJob",
+            "description" : "testDesc",
+            "datePosted" : "testDate",
+            "validThrough": "testDate",
+            "employmentType": "testType",
+            "hiringOrganization": [ {
+                "name": "testName",
+                "address": "testAddress"
+              } ]
+        }
+    ]    
+}
+    

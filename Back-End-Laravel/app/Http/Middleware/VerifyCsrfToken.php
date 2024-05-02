@@ -13,6 +13,8 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'sendToRdf4j',
-        'getRdf4j'
+        'getRdf4j',
+        'sendToGraphQl',
+        'getGraphQl'
     ];
 }

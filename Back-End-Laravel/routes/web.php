@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\ToRdf4jController;
 use App\Http\Controllers\FromRdf4jController;
+use App\Http\Controllers\ToGraphQlController;
+use App\Http\Controllers\FromGraphQlController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +22,5 @@ use App\Http\Controllers\FromRdf4jController;
 Route::get('/jsonLdScraping', [WelcomeController::class, 'index']);
 Route::post('/sendToRdf4j', [ToRdf4jController::class, 'index'] );
 Route::get('/getRdf4j', [FromRdf4jController::class, 'index'] );
+Route::post( '/sendToGraphQl', [ToGraphQlController::class, 'index'] );
+Route::post( '/getGraphQl', [FromGraphQlController::class, 'index'] );
