@@ -15,6 +15,7 @@ class VerifyCsrfToken extends Middleware
         'sendToRdf4j',
         'getRdf4j',
         'sendToGraphQl',
-        'getGraphQl'
+        'getGraphQl',
+        'sendToAi'
     ];
 }

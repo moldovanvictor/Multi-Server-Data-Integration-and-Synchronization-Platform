@@ -6,6 +6,7 @@ use App\Http\Controllers\ToRdf4jController;
 use App\Http\Controllers\FromRdf4jController;
 use App\Http\Controllers\ToGraphQlController;
 use App\Http\Controllers\FromGraphQlController;
+use App\Http\Controllers\ToAiController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,3 +25,4 @@ Route::post('/sendToRdf4j', [ToRdf4jController::class, 'index'] );
 Route::get('/getRdf4j', [FromRdf4jController::class, 'index'] );
 Route::post( '/sendToGraphQl', [ToGraphQlController::class, 'index'] );
 Route::post( '/getGraphQl', [FromGraphQlController::class, 'index'] );
+Route::post( '/sendToAi', [ToAiController::class, 'index'] );

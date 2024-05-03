@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 class WelcomeController extends Controller
 {
     
-public function index()
+public function index(Request $request)
 {
     
     $ch = curl_init();
@@ -17,16 +17,17 @@ public function index()
 
     curl_close($ch);
 
-    preg_match('/<script type="application\/ld\+json">(.*?)<\/script>/s', $response, $matches);
+    preg_match('/<script type="application\/ld\+json" id="scriptTag">(.*?)<\/script>/s', $response, $matches);
+
 
     if (isset($matches[1])) {
         $jsonld = $matches[1];
 
-        header("Content-type:application/javascript");
+        header("Content-type:application/json");
 
-        $callback = $_GET["callback"];
+        // $callback = $_GET["callback"];
 
-        return $callback . "(" . $jsonld . ")";
+        return $jsonld;
     } else {
         return response()->json(['error' => 'JSON-LD data not found'], 404);
     }
