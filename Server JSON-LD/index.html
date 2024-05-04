@@ -1,110 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="public/indexCss.css"/>
-  <script type="application/ld+json" id="scriptTag">
-    {
-      "@context": {
-        "@vocab": "https://schema.org/",
-        "x": "http://victor-vlad.ro/"
-      },
-      "@graph": [
-        {
-          "@type": "JobPosting",
-          "title": "Data Engineer",
-          "description": "Lorem Ipsum",
-          "datePosted": "2024-04-17",
-          "validThrough": "2024-06-17",
-          "employmentType": "FULL_TIME",
-          "hiringOrganization": [ {
-            "@type": "Organization",
-            "@id": "x:bosch",
-            "name": "Bosch",
-            "address": "Germany"
-          } ]
-        },
-        {
-          "@type": "JobPosting",
-          "title": "Software Developer",
-          "description": "Lorem Ipsum",
-          "datePosted": "2024-05-22",
-          "validThrough": "2024-08-18",
-          "employmentType": "FULL_TIME",
-          "hiringOrganization": [ {
-            "@type": "Organization",
-            "@id": "x:endava",
-            "name": "Endava",
-            "address": "UK"
-          } ]
-        },
-        {
-          "@type": "JobPosting",
-          "title": "System Architect",
-          "description": "Lorem Ipsum",
-          "datePosted": "2024-02-27",
-          "validThrough": "2024-09-11",
-          "employmentType": "FULL_TIME",
-          "hiringOrganization": [ {
-            "@type": "Organization",
-            "@id": "x:uipath",
-            "name": "UiPath",
-            "address": "USA"
-          } ]
-        }
-      ]
-    }    
-
-  </script>
-  
-</head>
-<body>
-  <div id = "tinta">
-
-  </div>
-  <script> 
-    tinta = document.getElementById( "tinta" );
-    scriptTag = document.getElementById( "scriptTag" );
-    jsonLd = JSON.parse( scriptTag.innerText );
-    context = jsonLd["@context"];
-    contextTitle = document.createElement( 'h1' );
-    contextTitle.textContent = "Contexts";
-    tinta.appendChild( contextTitle );
-    for ( key in context ) {
-      inregistrare = document.createElement( 'h2' );
-      inregistrare.textContent = key + ': ' + context[key];
-      tinta.appendChild( inregistrare );
-    }
-    graph = jsonLd["@graph"];
-    graphTitle = document.createElement( 'h1' );
-    graphTitle.textContent = "Graph";
-    tinta.appendChild( graphTitle );
-    for ( key in graph ) {
-      containerDate = document.createElement( 'div' );
-      containerDate.setAttribute( 'class', 'containerDate' );
-      for ( at in graph[key] ) {
-        if ( at != "hiringOrganization" ){
-        // console.log( at );
-        h2 = document.createElement( 'h2' );
-        h2.textContent = at + ': ' + graph[key][at];
-        containerDate.appendChild( h2 );
-        }
-        else {
-          for ( cheieFirma in graph[key][at] ) {
-            for ( atr in graph[key][at][cheieFirma] ) {
-              h3 = document.createElement( 'h3' );
-              h3.textContent = atr + ': ' + graph[key][at][cheieFirma][atr];
-              containerDate.appendChild( h3 );
-              console.log( atr, graph[key][at][cheieFirma][atr] );
-            }
-          }
-        }
-      }
-      tinta.appendChild( containerDate );
-    }
-    
-    // console.log( graph );
-  </script>
-</body>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" type="text/css" href="public/indexCss.css"/>
+      <script type="application/ld+json" id="scriptTag">
+         {
+           "@context": {
+             "@vocab": "https://schema.org/",
+             "x": "http://victor-vlad.ro/"
+           },
+           "@graph": [
+             {
+               "@type": "JobPosting",
+               "title": "Data Engineer",
+               "description": "Lorem Ipsum",
+               "datePosted": "2024-04-17",
+               "validThrough": "2024-06-17",
+               "employmentType": "FULL_TIME",
+               "hiringOrganization": [ {
+                 "@type": "Organization",
+                 "@id": "x:bosch",
+                 "name": "Bosch",
+                 "address": "Germany"
+               } ]
+             },
+             {
+               "@type": "JobPosting",
+               "title": "Software Developer",
+               "description": "Lorem Ipsum",
+               "datePosted": "2024-05-22",
+               "validThrough": "2024-08-18",
+               "employmentType": "FULL_TIME",
+               "hiringOrganization": [ {
+                 "@type": "Organization",
+                 "@id": "x:endava",
+                 "name": "Endava",
+                 "address": "UK"
+               } ]
+             },
+             {
+               "@type": "JobPosting",
+               "title": "System Architect",
+               "description": "Lorem Ipsum",
+               "datePosted": "2024-02-27",
+               "validThrough": "2024-09-11",
+               "employmentType": "FULL_TIME",
+               "hiringOrganization": [ {
+                 "@type": "Organization",
+                 "@id": "x:uipath",
+                 "name": "UiPath",
+                 "address": "USA"
+               } ]
+             }
+           ]
+         }    
+         
+      </script>
+   </head>
+   <body>
+      <div id = "tinta">
+      </div>
+      <script> 
+         tinta = document.getElementById( "tinta" );
+         scriptTag = document.getElementById( "scriptTag" );
+         jsonLd = JSON.parse( scriptTag.innerText );
+         context = jsonLd["@context"];
+         contextTitle = document.createElement( 'h1' );
+         contextTitle.textContent = "Contexts";
+         tinta.appendChild( contextTitle );
+         for ( key in context ) {
+           inregistrare = document.createElement( 'h2' );
+           inregistrare.textContent = key + ': ' + context[key];
+           tinta.appendChild( inregistrare );
+         }
+         graph = jsonLd["@graph"];
+         graphTitle = document.createElement( 'h1' );
+         graphTitle.textContent = "Graph";
+         tinta.appendChild( graphTitle );
+         for ( key in graph ) {
+           containerDate = document.createElement( 'div' );
+           containerDate.setAttribute( 'class', 'containerDate' );
+           for ( at in graph[key] ) {
+             if ( at != "hiringOrganization" ){
+             h2 = document.createElement( 'h2' );
+             h2.textContent = at + ': ' + graph[key][at];
+             containerDate.appendChild( h2 );
+             }
+             else {
+               for ( cheieFirma in graph[key][at] ) {
+                 for ( atr in graph[key][at][cheieFirma] ) {
+                   h3 = document.createElement( 'h3' );
+                   h3.textContent = atr + ': ' + graph[key][at][cheieFirma][atr];
+                   containerDate.appendChild( h3 );
+                 }
+               }
+             }
+           }
+           tinta.appendChild( containerDate );
+         }
+      </script>
+   </body>
 </html>
