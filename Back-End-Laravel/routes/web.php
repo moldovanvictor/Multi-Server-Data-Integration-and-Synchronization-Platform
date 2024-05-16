@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\FromJSONLD;
 use App\Http\Controllers\ToRdf4jController;
 use App\Http\Controllers\FromRdf4jController;
 use App\Http\Controllers\ToGraphQlController;
@@ -20,7 +20,7 @@ use App\Http\Controllers\ToAiController;
 
 
 
-Route::get('/jsonLdScraping', [WelcomeController::class, 'index']);
+Route::get('/jsonLdScraping', [FromJSONLD::class, 'index']);
 Route::post('/sendToRdf4j', [ToRdf4jController::class, 'index'] );
 Route::get('/getRdf4j', [FromRdf4jController::class, 'index'] );
 Route::post( '/sendToGraphQl', [ToGraphQlController::class, 'index'] );

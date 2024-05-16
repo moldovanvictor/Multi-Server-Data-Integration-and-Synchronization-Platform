@@ -12,7 +12,8 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "ml/json-ld": "^1.2",
-        "webonyx/graphql-php": "^15.11"
+        "webonyx/graphql-php": "^15.11",
+      "ext-curl": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
