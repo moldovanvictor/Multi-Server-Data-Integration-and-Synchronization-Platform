@@ -1,1 +1,0 @@
-json-graphql-server dateinitialegql.json
